@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Spree::Admin::ProductsController do
@@ -6,12 +8,12 @@ describe Spree::Admin::ProductsController do
   describe "on :index" do
     it "renders index" do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "on a PUT to :update" do
-    before(:each) do
+    before do
       @product = FactoryBot.create(:product)
       @store = FactoryBot.create(:store)
     end
@@ -22,8 +24,8 @@ describe Spree::Admin::ProductsController do
 
         put :update,
           params: {
-            :id => @product.to_param,
-            :product => {:name => @product.name},
+            id: @product.to_param,
+            product: { name: @product.name },
             update_store_ids: 'true'
           }
 
@@ -35,8 +37,8 @@ describe Spree::Admin::ProductsController do
       it "clears stores" do
         put :update,
           params: {
-            :id => @product.to_param,
-            :product => {:name => @product.name, :store_ids => [@store.id]},
+            id: @product.to_param,
+            product: { name: @product.name, store_ids: [@store.id] },
             update_store_ids: 'true'
           }
 

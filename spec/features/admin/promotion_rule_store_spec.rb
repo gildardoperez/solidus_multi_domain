@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe "Store promotion rule", js: true do
@@ -9,11 +11,8 @@ RSpec.describe "Store promotion rule", js: true do
   it "Can add a store rule to a promotion" do
     visit spree.edit_admin_promotion_path(promotion)
 
-    if SolidusSupport.solidus_gem_version < Gem::Version.new('2.3.x')
-      select2 "Store", from: "Add rule of type"
-    else
-      select "Store", from: "Add rule of type"
-    end
+    select "Store", from: "promotion_rule_type"
+
     within("#rules_container") { click_button "Add" }
 
     select2_search store.name, from: "Choose Stores"
